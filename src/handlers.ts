@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 import * as yup from "yup";
 
 const docClient = new AWS.DynamoDB.DocumentClient();
-const tableName = "Coates";
+const tableName = "User";
 const headers = {
   "content-type": "application/json",
 };
@@ -12,7 +12,7 @@ const headers = {
 const schema = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().required(),
-  DOB: yup.number().required(),
+  dob: yup.string().required(),
 });
 
 export const createUser = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {

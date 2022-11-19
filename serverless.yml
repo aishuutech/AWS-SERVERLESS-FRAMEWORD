@@ -23,6 +23,7 @@ frameworkVersion: "2"
 provider:
   name: aws
   runtime: nodejs12.x
+  region: ap-south-1
   lambdaHashingVersion: 20201221
 
   # you can overwrite defaults here
@@ -55,7 +56,7 @@ provider:
             - "dynamodb:DeleteItem"
             - "dynamodb:Scan"
           Resource:
-            - { "Fn::GetAtt": ["Coates", "Arn"] }
+            - { "Fn::GetAtt": ["User", "Arn"] }
 
 # you can define service wide environment variables here
 #  environment:
@@ -156,10 +157,11 @@ plugins:
 #       Value: "Some output value"
 resources:
   Resources:
-    Coates:
+    User:
       Type: AWS::DynamoDB::Table
+      DeletionPolicy: Delete
       Properties:
-        TableName: Coates
+        TableName: User
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
